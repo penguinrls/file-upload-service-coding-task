@@ -1,0 +1,68 @@
+plugins {
+	id 'java'
+	id 'java-library'
+	id 'java-test-fixtures'
+	id 'org.springframework.boot' version '3.3.6'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.rls.security'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	springdocVersion="1.6.9"
+	liquibaseVersion = "4.24.0"
+	liquibaseSlf4jVersion = "4.0.0"
+	springCloudCommonsVersion="3.0.1"
+	dbRiderVersion = "1.19.0"
+	wireMockVersion = "3.0.1"
+	springCloudContractWiremockVersion = "4.2.0"
+	wireMockJetty12Version = "3.10.0"
+}
+
+dependencies {
+
+	implementation project("database")
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.3"
+	implementation "org.liquibase:liquibase-core:${liquibaseVersion}"
+	implementation "com.mattbertolini:liquibase-slf4j:${liquibaseSlf4jVersion}"
+	implementation "org.springframework.cloud:spring-cloud-commons:${springCloudCommonsVersion}"
+	implementation "io.swagger.core.v3:swagger-annotations:2.2.16"
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation "com.github.database-rider:rider-junit5:${dbRiderVersion}"
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation(testFixtures(project("database")))
+	testCompileOnly 'org.projectlombok:lombok'
+	testImplementation "org.springframework.cloud:spring-cloud-contract-wiremock:${springCloudContractWiremockVersion}"
+	testImplementation "org.wiremock:wiremock-jetty12:${wireMockJetty12Version}"
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

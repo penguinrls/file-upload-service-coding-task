@@ -1,0 +1,55 @@
+plugins {
+    id 'java-library'
+    id'java-test-fixtures'
+}
+
+group = "com.file.upload"
+version = "0.0.1-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+ext {
+    ebrdJpaLibVersion = "4.0.1.+"
+    dbRiderVersion = "1.32.2"
+    liquibaseVersion = "4.24.0"
+    liquibaseSlf4jVersion = "4.0.0"
+    testContainersMssql = "1.16.3"
+    assertjDbVersion = "2.0.2"
+    testContainersVersion = "1.16.3"
+    springBootVersion = "3.3.6"
+}
+
+
+dependencies {
+
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    implementation "org.liquibase:liquibase-core:${liquibaseVersion}"
+    implementation "com.mattbertolini:liquibase-slf4j:${liquibaseSlf4jVersion}"
+
+    // JDBC drivers
+    implementation "com.microsoft.sqlserver:mssql-jdbc:9.4.1.jre8"
+
+    testFixturesImplementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    testImplementation "com.github.database-rider:rider-junit5:${dbRiderVersion}"
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.26.3'
+    testImplementation "org.assertj:assertj-db:${assertjDbVersion}"
+    testFixturesApi "org.testcontainers:junit-jupiter:${testContainersVersion}"
+    testFixturesApi "org.testcontainers:mssqlserver:${testContainersVersion}"
+    testFixturesImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+    testImplementation group: 'org.springframework', name: 'spring-test', version: '5.3.20'
+    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+
+}
+
+tasks.test {
+    useJUnitPlatform()
+}

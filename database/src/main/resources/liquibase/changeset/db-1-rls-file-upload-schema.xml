@@ -1,0 +1,49 @@
+
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+    <changeSet author="rls" id="db.1-file-upload-schema">
+
+        <!--            1. Request Id – This can be simply a generated UUID.-->
+        <!--            2. Request Uri-->
+        <!--            3. Request Timestamp – This should be the timestamp when the request reached the-->
+        <!--            application-->
+        <!--            4. HTTP Response code – 200, 403 , 500 etc-->
+        <!--            5. Requset IP Address-->
+        <!--            6. Request Country Code-->
+        <!--            7. Request IP Provider – The provider (ISP) of the IP address-->
+        <!--            8. Time Lapsed – The time taken (in milli seconds) to complete the request-->
+
+        <createTable tableName="FILE_UPLOAD_HISTORY">
+            <column name="REQUEST_ID" type="CHAR(36)">
+                <constraints primaryKeyName="PK_FILE_UPLOAD_HISTORY_ID" primaryKey="true" nullable="false" unique="true" />
+            </column>
+            <column name="REQUEST_URI" type="VARCHAR(300)">
+                <constraints nullable="true" />
+            </column>
+            <column name="REQUEST_TIME_STAMP" type="DATETIME">
+                <constraints nullable="true" />
+            </column>
+            <column name="RESPONSE_CODE" type="INT">
+                <constraints nullable="true" />
+            </column>
+            <column name="REQUEST_IP_ADDRESS" type="VARCHAR(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="REQUEST_COUNTRY_CODE" type="VARCHAR(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="REQUEST_IP_PROVIDER" type="VARCHAR(50)">
+                <constraints nullable="true" />
+            </column>
+            <column name="TIME_LAPSED_OF_REQUEST" type="INT">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>
