@@ -13,9 +13,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Component
 public class RequestInterceptorConfig implements WebMvcConfigurer {
 
-    private IpApiClient ipApiClient;
-    private FileHistoryRequestRepositoryTransactionService fileHistoryRepositoryTransactionService;
-    private FileUploadValidatorService fileUploadValidatorService;
+    private final IpApiClient ipApiClient;
+    private final FileHistoryRequestRepositoryTransactionService fileHistoryRepositoryTransactionService;
+    private final FileUploadValidatorService fileUploadValidatorService;
 
     public RequestInterceptorConfig(@Lazy FileHistoryRequestRepositoryTransactionServiceImpl fileHistoryRepositoryTransactionService,
                                     @Lazy IpApiClient ipApiClient,

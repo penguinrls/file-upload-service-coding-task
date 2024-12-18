@@ -106,7 +106,7 @@ class RequestInterceptorTest {
     }
 
     @Test
-    void shouldAfterCompletionOfRequestAndWriteToAudit() throws Exception {
+    void shouldAfterCompletionOfRequestAndWriteToAudit()  {
         // given
         LocalDateTime key = LocalDateTime.now();
         ArgumentCaptor<FileUploadRequestHistory> fileUploadRequestHistoryArgumentCaptor = ArgumentCaptor.forClass(FileUploadRequestHistory.class);
@@ -122,7 +122,6 @@ class RequestInterceptorTest {
         when(httpServletRequest.getAttribute("requestStart")).thenReturn(key);
         when(httpServletRequest.getAttribute("ipGeoLocationDtoMap")).thenReturn(Map.of(key, ipGeoLocationDto));
         when(httpServletRequest.getRequestURI()).thenReturn("/test");
-
 
         // when
         underTest.afterCompletion(httpServletRequest, httpServletResponse, o, null);

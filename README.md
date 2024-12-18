@@ -20,7 +20,7 @@ The app can be run using 'bootRun' gradle configuration on the main class FileUp
 
 Ensure you have SPRING_PROFILES_ACTIVE=localstack in the config for intellij
 
-Once the application runs up for the first time it will create the database schema for the application using liquiibase
+Once the application runs up for the first time it will create the database schema for the application using liquibase
 
 To stop the delete container from docker and start again 
 

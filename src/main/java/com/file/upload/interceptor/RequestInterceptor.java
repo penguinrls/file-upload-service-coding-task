@@ -1,7 +1,6 @@
 package com.file.upload.interceptor;
 
 import com.file.upload.api.service.FileHistoryRequestRepositoryTransactionService;
-import com.file.upload.api.service.FileHistoryRequestRepositoryTransactionServiceImpl;
 import com.file.upload.api.service.model.FileUploadRequestHistory;
 import com.file.upload.api.service.validator.FileUploadValidatorService;
 import com.file.upload.client.IpApiClient;
@@ -48,7 +47,7 @@ public class RequestInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         LocalDateTime requestStart = (LocalDateTime) request.getAttribute("requestStart");
         Map<LocalDateTime, IpGeoLocationDto> ipGeoLocationDtoMap = (Map<LocalDateTime, IpGeoLocationDto>) request.getAttribute("ipGeoLocationDtoMap");
 

@@ -5,8 +5,6 @@ import com.file.upload.api.service.repository.FileUploadRequestHistoryRepository
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 
 public class FileHistoryRequestRepositoryTransactionServiceImpl implements FileHistoryRequestRepositoryTransactionService {
@@ -19,18 +17,8 @@ public class FileHistoryRequestRepositoryTransactionServiceImpl implements FileH
 
     @Transactional
     @Override
-    public UUID save(FileUploadRequestHistory fileUploadHistory) {
-        return fileUploadRequestHistoryRepository.save(fileUploadHistory).getRequestId();
+    public void save(FileUploadRequestHistory fileUploadHistory) {
+         fileUploadRequestHistoryRepository.save(fileUploadHistory);
     }
 
-    @Transactional
-    @Override
-    public void update(UUID uuid, Long elapsedTimeInMilliseconds, Integer statusCode) {
-        fileUploadRequestHistoryRepository.findById(uuid)
-                .ifPresent(history -> {
-                    history.setTimeLapsedOfRequest(elapsedTimeInMilliseconds);
-                    history.setResponseCode(statusCode);
-                    fileUploadRequestHistoryRepository.save(history);
-                });
-    }
 }

@@ -6,7 +6,6 @@ import com.file.upload.api.service.validator.FileUploadValidatorServiceImpl;
 import com.file.upload.client.IpApiClient;
 import com.file.upload.client.response.IpGeoLocationDto;
 import com.file.upload.exception.FileProcessingException;
-import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,7 +16,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.multipart.MultipartFile;
 
-import static java.lang.String.format;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
@@ -56,11 +54,11 @@ class FileUploadApiControllerTest {
                 .countryCode("GB")
                 .build();
         MockMultipartFile multipartFile = new MockMultipartFile("file", "file".getBytes());
-        when(fileUploadFacadeImpl.uploadFile(any(MultipartFile.class), any(HttpServletRequest.class))).thenReturn("{}".getBytes());
+        when(fileUploadFacadeImpl.uploadFile(any(MultipartFile.class))).thenReturn("{}".getBytes());
         when(ipApiClient.getLocationMeta()).thenReturn(ipGeoLocationDto);
 
         // when
-        mockMvc.perform(multipart(format("/v1/api/upload"))
+        mockMvc.perform(multipart("/v1/api/upload")
                         .file(multipartFile))
                 .andExpect(status().isOk())
                 .andExpect(header().string("Content-Disposition", "attachment;filename=OutcomeFile.json"));
@@ -76,11 +74,11 @@ class FileUploadApiControllerTest {
                 .countryCode("GB")
                 .build();
         MockMultipartFile multipartFile = new MockMultipartFile("file", "file".getBytes());
-        when(fileUploadFacadeImpl.uploadFile(any(MultipartFile.class), any(HttpServletRequest.class))).thenThrow(new FileProcessingException("error"));
+        when(fileUploadFacadeImpl.uploadFile(any(MultipartFile.class))).thenThrow(new FileProcessingException("error"));
         when(ipApiClient.getLocationMeta()).thenReturn(ipGeoLocationDto);
 
         // when
-        mockMvc.perform(multipart(format("/v1/api/upload"))
+        mockMvc.perform(multipart("/v1/api/upload")
                         .file(multipartFile))
                 .andExpect(status().isBadRequest());
     }
@@ -98,7 +96,7 @@ class FileUploadApiControllerTest {
         when(ipApiClient.getLocationMeta()).thenReturn(ipGeoLocationDto);
 
         // when
-        mockMvc.perform(multipart(format("/v1/api/upload"))
+        mockMvc.perform(multipart("/v1/api/upload")
                         .file(multipartFile))
                 .andExpect(status().isForbidden());
     }
@@ -116,7 +114,7 @@ class FileUploadApiControllerTest {
         when(ipApiClient.getLocationMeta()).thenReturn(ipGeoLocationDto);
 
         // when
-        mockMvc.perform(multipart(format("/v1/api/upload"))
+        mockMvc.perform(multipart("/v1/api/upload")
                         .file(multipartFile))
                 .andExpect(status().isForbidden());
     }

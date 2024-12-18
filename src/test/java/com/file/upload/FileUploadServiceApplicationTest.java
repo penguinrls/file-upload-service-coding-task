@@ -41,8 +41,6 @@ class FileUploadServiceApplicationTest {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	private IpStub ipStub;
-
 	@Test
 	@DataSet(value = "datasets/file-upload-request-history.yml", cleanBefore = true)
 	void shouldUpLoadFileAndReturnJson() throws Exception {

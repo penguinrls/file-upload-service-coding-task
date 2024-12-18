@@ -43,7 +43,6 @@ class FileProcessingServiceImplTest {
     @Test
     void shouldNotProcessFileWhenInWrongFormat() throws Exception {
         // given
-        byte[] data = Files.readAllBytes(Paths.get("src/test/resources/EntryFile.txt"));
         MockMultipartFile multipartFile = new MockMultipartFile("file", "{}".getBytes());
 
         // when then

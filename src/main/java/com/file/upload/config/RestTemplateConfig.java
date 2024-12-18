@@ -1,8 +1,5 @@
 package com.file.upload.config;
 
-import com.file.upload.client.IpApiClient;
-import com.file.upload.client.IpApiClientImpl;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.commons.httpclient.HttpClientConfiguration;
 import org.springframework.context.annotation.Bean;

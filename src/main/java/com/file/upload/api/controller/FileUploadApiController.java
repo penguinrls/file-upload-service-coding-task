@@ -3,7 +3,6 @@ package com.file.upload.api.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -30,8 +29,8 @@ public class FileUploadApiController {
     })
     @PostMapping(path = "v1/api/upload", consumes = MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(value = CREATED)
-    public ResponseEntity<byte[]> upload(@RequestPart("file") MultipartFile file, HttpServletRequest request) {
-            byte[] json = fileUploadFacade.uploadFile(file, request);
+    public ResponseEntity<byte[]> upload(@RequestPart("file") MultipartFile file) {
+            byte[] json = fileUploadFacade.uploadFile(file);
 
             return ResponseEntity.ok()
                     .contentType(MediaType.parseMediaType("application/json"))
