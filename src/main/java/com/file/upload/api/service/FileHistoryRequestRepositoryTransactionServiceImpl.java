@@ -6,7 +6,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 @Component
-
 public class FileHistoryRequestRepositoryTransactionServiceImpl implements FileHistoryRequestRepositoryTransactionService {
 
     private final FileUploadRequestHistoryRepository fileUploadRequestHistoryRepository;
